@@ -12,13 +12,17 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 
 private val DarkColorScheme = darkColorScheme(
-    primary = Color(0xFFBB86FC),
-    secondary = Color(0xFF03DAC6),
+    primary = Color(0xFF0000FF), // Azul para o tema escuro
+    secondary = Color(0xFFFFFFFF), // Branco para o tema escuro
+    background = Color(0xFF000000), // Preto para o fundo do tema escuro
+    surface = Color(0xFF333333) // Cinza escuro para superfícies do tema escuro
 )
 
 private val LightColorScheme = lightColorScheme(
-    primary = Color(0xFF6200EE),
-    secondary = Color(0xFF03DAC6),
+    primary = Color(0xFF0000FF), // Azul para o tema claro
+    secondary = Color(0xFFFFFFFF), // Branco para o tema claro
+    background = Color(0xFFFFFFFF), // Branco para o fundo do tema claro
+    surface = Color(0xFFF5F5F5) // Cinza claro para superfícies do tema claro
 )
 
 @Composable

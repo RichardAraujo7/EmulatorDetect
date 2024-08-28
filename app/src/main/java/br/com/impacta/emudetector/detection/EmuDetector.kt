@@ -1,7 +1,6 @@
 package br.com.impacta.emudetector.detection
 
 import android.content.Context
-import android.os.Build
 import br.com.impacta.emudetector.detection.checks.AppSignaturesEmuDetector
 import br.com.impacta.emudetector.detection.checks.BackgroundProcessesEmuDetector
 import br.com.impacta.emudetector.detection.checks.BuildConfigEmuDetector
