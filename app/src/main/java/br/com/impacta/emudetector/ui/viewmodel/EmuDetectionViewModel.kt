@@ -14,15 +14,21 @@ class EmuDetectionViewModel(application: Application) : AndroidViewModel(applica
     private val _detectionResult = MutableStateFlow<Result<EmuDetectionResult?>>(Result.success(null))
     val detectionResult: StateFlow<Result<EmuDetectionResult?>> get() = _detectionResult
 
+    private val _isLoading = MutableStateFlow(false)
+    val isLoading: StateFlow<Boolean> get() = _isLoading
+
     private val emuDetector = EmuDetector(getApplication())
 
     fun checkForEmu() {
         viewModelScope.launch {
+            _isLoading.value = true
             try {
                 val result = emuDetector.detect()
                 _detectionResult.value = Result.success(result)
             } catch (e: Exception) {
                 _detectionResult.value = Result.failure(e)
+            } finally {
+                _isLoading.value = false
             }
         }
     }

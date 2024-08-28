@@ -31,26 +31,27 @@ class EmuDetector(context: Context) {
     )
 
     fun detect(): EmuDetectionResult {
-        var totalScore = 0
-        val detectionResults = mutableMapOf<String, Boolean>()
-        detectionStrategies.forEach { strategy ->
-            val hasEmu = strategy.detect()
-            totalScore += if (hasEmu) strategy.getScoreWeight() else 0
-            detectionResults[strategy::class.simpleName ?: "Unknown"] = hasEmu
+        val results = detectionStrategies.associate { strategy ->
+            strategy::class.simpleName to strategy.detect()
+        }
+        val totalScore = detectionStrategies.filter { strategy ->
+            results[strategy::class.simpleName] == true
+        }.sumOf { strategy ->
+            strategy.getScoreWeight()
         }
 
         return EmuDetectionResult(
-            hasEmuName = detectionResults[BuildConfigEmuDetector::class.simpleName] ?: false,
-            hasEmuFiles = detectionResults[FilesEmuDetector::class.simpleName] ?: false,
-            isVirtualizationPresent = detectionResults[VirtualizationEmuDetector::class.simpleName] ?: false,
-            isEmuNetwork = detectionResults[NetworkEmuDetector::class.simpleName] ?: false,
-            hasFakeSensors = detectionResults[SensorEmuDetector::class.simpleName] ?: false,
-            hasUnsupportedFeatures = detectionResults[SystemPropertiesEmuDetector::class.simpleName] ?: false,
-            isCpuEmu = detectionResults[CpuModelEmuDetector::class.simpleName] ?: false,
-            isScreenResolutionUncommon = detectionResults[ScreenResolutionEmuDetector::class.simpleName] ?: false,
-            hasSuspiciousProcesses = detectionResults[BackgroundProcessesEmuDetector::class.simpleName] ?: false,
-            hasSuspiciousAppSignatures = (detectionResults[AppSignaturesEmuDetector::class.simpleName] ?: false),
-            hasLibraries = detectionResults[LibrariesEmuDetector::class.simpleName] ?: false,
+            hasEmuName = results[BuildConfigEmuDetector::class.simpleName] ?: false,
+            hasEmuFiles = results[FilesEmuDetector::class.simpleName] ?: false,
+            isVirtualizationPresent = results[VirtualizationEmuDetector::class.simpleName] ?: false,
+            isEmuNetwork = results[NetworkEmuDetector::class.simpleName] ?: false,
+            hasFakeSensors = results[SensorEmuDetector::class.simpleName] ?: false,
+            hasUnsupportedFeatures = results[SystemPropertiesEmuDetector::class.simpleName] ?: false,
+            isCpuEmu = results[CpuModelEmuDetector::class.simpleName] ?: false,
+            isScreenResolutionUncommon = results[ScreenResolutionEmuDetector::class.simpleName] ?: false,
+            hasSuspiciousProcesses = results[BackgroundProcessesEmuDetector::class.simpleName] ?: false,
+            hasSuspiciousAppSignatures = results[AppSignaturesEmuDetector::class.simpleName] ?: false,
+            hasLibraries = results[LibrariesEmuDetector::class.simpleName] ?: false,
             score = totalScore
         )
     }
