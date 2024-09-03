@@ -33,11 +33,13 @@ import br.com.impacta.emudetector.ui.components.LoginButton
 import br.com.impacta.emudetector.ui.components.PasswordTextField
 import br.com.impacta.emudetector.ui.components.saveEmailPreference
 import br.com.impacta.emudetector.ui.viewmodel.EmuDetectionViewModel
+import com.google.firebase.auth.FirebaseAuth
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LoginScreen(
     navController: NavController,
+    auth: FirebaseAuth,
     viewModel: EmuDetectionViewModel = viewModel()
 ) {
     val context = LocalContext.current
@@ -47,18 +49,8 @@ fun LoginScreen(
     var password by remember { mutableStateOf("") }
     var rememberEmail by remember { mutableStateOf(sharedPreferences.getBoolean("rememberEmail", false)) }
     val isLoading by viewModel.isLoading.collectAsState()
-    val detectionResultState by viewModel.detectionResult.collectAsState()
 
     val isLoginButtonEnabled = email.isNotBlank() && password.length == 6
-
-    LaunchedEffect(detectionResultState) {
-        val result = handleDetectionResult(detectionResultState)
-        if (result != null) {
-            if ((detectionResultState.getOrNull()?.score ?: 0) > 20) {
-                navController.navigate("error")
-            }
-        }
-    }
 
     Scaffold(
         topBar = {
@@ -96,19 +88,11 @@ fun LoginScreen(
                             Toast.makeText(context, "Dados de login inválidos.", Toast.LENGTH_LONG).show()
                             return@LoginButton
                         }
-                        viewModel.checkForEmu()
+                        viewModel.checkForEmu(email, password, navController, auth)
                     },
                     enabled = isLoginButtonEnabled
                 )
             }
         }
-    }
-}
-
-private fun handleDetectionResult(detectionResultState: Result<EmuDetectionResult?>): String? {
-    return when {
-        detectionResultState.isFailure -> "Erro ao verificar o emulador."
-        (detectionResultState.getOrNull()?.score ?: 0) > 20 -> "Emulador detectado. Não é possível prosseguir com o login."
-        else -> null
     }
 }
