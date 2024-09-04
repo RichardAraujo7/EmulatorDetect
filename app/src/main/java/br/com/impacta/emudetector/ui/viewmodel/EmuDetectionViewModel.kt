@@ -36,23 +36,17 @@ class EmuDetectionViewModel(application: Application) : AndroidViewModel(applica
                 val result = emuDetector.detect()
                 _detectionResult.value = Result.success(result)
                 val score = detectionResult.value.getOrNull()?.score ?: 0
-//                val score = 19
                 if (score <= 20) {
                     auth.signInWithEmailAndPassword(email, password)
                         .addOnCompleteListener { task ->
                             if (task.isSuccessful) {
                                 navController.navigate("menu")
                             } else {
-                                val exception = task.exception
-                                Log.e("LoginScreen", "signInWithEmail:failure", exception)
-                                Toast.makeText(
-                                    getApplication(), "Falha na autenticação.",
-                                    Toast.LENGTH_SHORT
-                                ).show()
+                                navController.navigate("error/authentication")
                             }
                         }
                 } else {
-                    navController.navigate("error")
+                    navController.navigate("error/emulator")
                 }
             } catch (e: Exception) {
                 _detectionResult.value = Result.failure(e)
