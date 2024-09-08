@@ -1,5 +1,6 @@
 package br.com.impacta.emudetector.detection.checks
 
+import android.util.Log
 import java.io.File
 
 class LibrariesEmuDetector : EmuDetectorStrategy {
@@ -10,9 +11,14 @@ class LibrariesEmuDetector : EmuDetectorStrategy {
             "/system/lib/libdroid4x.so", "/system/lib/libbluestacks.so",
             "/system/lib/libnox.so", "/system/lib/libgenymotion.so",
             "/system/lib/libandyroid.so", "/system/lib/libemulator.so",
-            "/system/lib/libOpenglSystemCommon.so", "/system/lib/libGLESv1_CM.so",
-            "/system/lib/libGLESv2.so", "/system/lib/libEGL.so"
+            "/system/lib/libOpenglSystemCommon.so"
         )
-        return emuLibraries.any { File(it).exists() }
+        val detectedLibraries = emuLibraries.filter { File(it).exists() }
+        return if (detectedLibraries.isNotEmpty()) {
+            Log.d("Classes Detectadas", "Bibliotecas suspeitas detectadas: $detectedLibraries")
+            true
+        } else {
+            false
+        }
     }
 }

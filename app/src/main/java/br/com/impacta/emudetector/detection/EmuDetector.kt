@@ -1,6 +1,7 @@
 package br.com.impacta.emudetector.detection
 
 import android.content.Context
+import android.util.Log
 import br.com.impacta.emudetector.detection.checks.AppSignaturesEmuDetector
 import br.com.impacta.emudetector.detection.checks.BackgroundProcessesEmuDetector
 import br.com.impacta.emudetector.detection.checks.BuildConfigEmuDetector
@@ -34,11 +35,18 @@ class EmuDetector(context: Context) {
         val results = detectionStrategies.associate { strategy ->
             strategy::class.simpleName to strategy.detect()
         }
-        val totalScore = detectionStrategies.filter { strategy ->
+
+        var totalScore = 0
+        val contributingStrategies = mutableListOf<String>()
+
+        detectionStrategies.filter { strategy ->
             results[strategy::class.simpleName] == true
-        }.sumOf { strategy ->
-            strategy.getScoreWeight()
+        }.forEach { strategy ->
+            totalScore += strategy.getScoreWeight()
+            contributingStrategies.add(strategy::class.simpleName ?: "Unknown")
         }
+
+        Log.d("Classes Detectadas", "Classes que aumentaram o totalScore: ${contributingStrategies.joinToString(", ")}")
 
         return EmuDetectionResult(
             hasEmuName = results[BuildConfigEmuDetector::class.simpleName] ?: false,
