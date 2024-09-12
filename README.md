@@ -103,3 +103,36 @@ MuMu // Tela de login e pós tentativa de login
 
 ![MuMu_emulador_detectado](https://github.com/user-attachments/assets/8aabedef-b679-41dd-966f-4b8d75a25614)
 
+RESULTADOS DEVICES FISICOS
+
+Samsung Galaxy S23 Ultra // Tela de login e pós tentativa de login
+
+![S23ULTRA_LOGIN](https://github.com/user-attachments/assets/e2a93ec6-3c53-4339-8631-005d9532a9e8)
+
+![S23ULTRA_POSLOGIN](https://github.com/user-attachments/assets/b59a4ae4-bcda-403e-87cb-a59f57a5f27f)
+
+Xiaomi MI 8 // Tela de login e pós tentativa de login
+
+![XIAOMIMI8_LOGIN](https://github.com/user-attachments/assets/e69b6f65-91f8-4288-b774-ddd632b0e18c)
+
+![XIAOMIMI8_POSLOGIN](https://github.com/user-attachments/assets/b2a18a33-d358-450c-bcab-a684634dbccf)
+
+Motorola Edge 20 // Tela de login e pós tentativa de login
+
+![MOTOROLAEDGE20_LOGIN](https://github.com/user-attachments/assets/8ed3f5a4-f618-417f-bb4c-3de9f8173e97)
+
+![MOTOROLAEDGE20_POSLOGIN](https://github.com/user-attachments/assets/4d7a700b-38da-4ecf-a049-a4c0bde9edf8)
+
+Xiaomi Redmi 12s // Tela de login e pós tentativa de login
+
+![XIAOMIREDMI12S_LOGIN](https://github.com/user-attachments/assets/ba3d6a91-7f08-43be-9789-6e97639acfad)
+
+![XIAOMI_REDMI12S_POSLOGIN](https://github.com/user-attachments/assets/0a4e9ebb-cb75-4c63-a1a7-3aa472ea32f1)
+
+Samsung Galaxy M52  // Tela de login e pós tentativa de login
+
+![SAMSUNGGALAXYM52_LOGIN](https://github.com/user-attachments/assets/0d8dd4c2-b313-4ee7-b671-28f0d3cad0a5)
+
+![SAMSUNGGALAXYM52_POSLOGIN](https://github.com/user-attachments/assets/ff3b46bf-40ca-44c1-9041-44bf09e2f37e)
+
+POSSUI EMULADOR DE PSP INSTALADO, POR ISSO O RESULTADO FALSO POSITIVO 
