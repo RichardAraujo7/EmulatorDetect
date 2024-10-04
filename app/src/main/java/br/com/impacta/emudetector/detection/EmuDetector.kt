@@ -3,7 +3,7 @@ package br.com.impacta.emudetector.detection
 import android.content.Context
 import android.util.Log
 import br.com.impacta.emudetector.detection.checks.AppSignaturesEmuDetector
-import br.com.impacta.emudetector.detection.checks.BackgroundProcessesEmuDetector
+import br.com.impacta.emudetector.detection.checks.BackgroundProcessEmuDetector
 import br.com.impacta.emudetector.detection.checks.BuildConfigEmuDetector
 import br.com.impacta.emudetector.detection.checks.CpuModelEmuDetector
 import br.com.impacta.emudetector.detection.checks.EmuDetectorStrategy
@@ -26,7 +26,7 @@ class EmuDetector(context: Context) {
         SystemPropertiesEmuDetector(),
         CpuModelEmuDetector(),
         ScreenResolutionEmuDetector(context),
-        BackgroundProcessesEmuDetector(),
+        BackgroundProcessEmuDetector(),
         AppSignaturesEmuDetector(context),
         LibrariesEmuDetector()
     )
@@ -57,7 +57,7 @@ class EmuDetector(context: Context) {
             hasUnsupportedFeatures = results[SystemPropertiesEmuDetector::class.simpleName] ?: false,
             isCpuEmu = results[CpuModelEmuDetector::class.simpleName] ?: false,
             isScreenResolutionUncommon = results[ScreenResolutionEmuDetector::class.simpleName] ?: false,
-            hasSuspiciousProcesses = results[BackgroundProcessesEmuDetector::class.simpleName] ?: false,
+            hasSuspiciousProcesses = results[BackgroundProcessEmuDetector::class.simpleName] ?: false,
             hasSuspiciousAppSignatures = results[AppSignaturesEmuDetector::class.simpleName] ?: false,
             hasLibraries = results[LibrariesEmuDetector::class.simpleName] ?: false,
             score = totalScore

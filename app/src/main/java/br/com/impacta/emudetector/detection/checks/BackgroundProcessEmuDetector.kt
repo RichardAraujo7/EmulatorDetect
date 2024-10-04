@@ -1,6 +1,6 @@
 package br.com.impacta.emudetector.detection.checks
 
-class BackgroundProcessesEmuDetector : EmuDetectorStrategy {
+class BackgroundProcessEmuDetector : EmuDetectorStrategy {
     override fun getScoreWeight() = 30
     override fun detect(): Boolean {
         val processList = try {
