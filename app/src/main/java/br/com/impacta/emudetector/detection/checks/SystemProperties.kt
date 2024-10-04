@@ -1,4 +1,4 @@
-package br.com.impacta.emudetector.system
+package br.com.impacta.emudetector.detection.checks
 
 import android.annotation.SuppressLint
 import java.io.BufferedReader

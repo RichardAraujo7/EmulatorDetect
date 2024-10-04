@@ -1,7 +1,5 @@
 package br.com.impacta.emudetector.detection.checks
 
-import br.com.impacta.emudetector.system.SystemProperties
-
 class SystemPropertiesEmuDetector : EmuDetectorStrategy {
     override fun getScoreWeight() = 30
     override fun detect(): Boolean {
